@@ -1,0 +1,32 @@
+{
+    "name": "apility/itslearning",
+    "description": "It's Learning integration for Netflex",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Alrek",
+            "email": "thomas@apility.no"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Apility\\ItsLearning\\": "src/"
+        }
+    },
+    "require": {
+        "netflex/customers": "^4.0",
+        "netflex/support": "^4.0"
+    },
+    "require-dev": {
+        "larapack/dd": "^1.1",
+        "apility/test-utilities": "^0.0.13"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Apilty\\ItsLearning\\Providers\\ItsLearningServiceProvider"
+            ]
+        }
+    }
+}
