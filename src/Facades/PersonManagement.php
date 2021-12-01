@@ -7,8 +7,10 @@ use Apility\ItsLearning\Services\PersonManagementServiceSync;
 use Apility\ItsLearning\Models\Person;
 
 /**
- * @method static Person|null readPerson(\Netflex\Customers\Customer $customer)
- * @method static Person|null createPerson(\Netflex\Customers\Customer $customer, string $role = 'student')
+ * @method static bool createPersonFromCustomer(\Netflex\Customers\Customer $customer, string $role = 'student')
+ * @method static array readPersonByCustomerId(string|int $customer)
+ * @method static bool updatePersonFromCustomer(\Netflex\Customers\Customer $customer, string $role = 'student')
+ * @method static bool deletePersonByCustomerId(string|int $customer)
  */
 class PersonManagement extends Facade
 {

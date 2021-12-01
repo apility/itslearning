@@ -6,7 +6,10 @@ use SoapClient;
 use SoapVar;
 use SoapHeader;
 
+use SoapFault;
+
 use Apility\ItsLearning\Contracts\AuthorizesClients;
+use Apility\ItsLearning\Exceptions\ItsLearningException;
 
 abstract class ItsLearningSoapClient extends SoapClient
 {
@@ -95,5 +98,14 @@ abstract class ItsLearningSoapClient extends SoapClient
         );
 
         return new SoapHeader($namespace, $container, $header);
+    }
+
+    public function __call($method, $arguments = [])
+    {
+        try {
+            return parent::__call($method, $arguments);
+        } catch (SoapFault $e) {
+            throw new ItsLearningException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }
