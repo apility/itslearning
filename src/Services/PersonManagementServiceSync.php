@@ -2,6 +2,7 @@
 
 namespace Apility\ItsLearning\Services;
 
+use Apility\ItsLearning\Facades\PersonManagement;
 use Apility\ItsLearning\Models\Person;
 use Apility\ItsLearning\Soap\ItsLearningSoapClient;
 
@@ -51,7 +52,7 @@ class PersonManagementServiceSync extends ItsLearningSoapClient
      * @param string $role
      * @return bool
      */
-    public function createPersonFromCustomer(Customer $customer, string $role = 'Student'): bool
+    public function createPersonFromCustomer(Customer $customer, string $role = PersonManagement::ROLE_STUDENT): bool
     {
         $payload = $this->customerToPersonPayload($customer, $role);
         parent::createPerson($payload);
@@ -64,7 +65,7 @@ class PersonManagementServiceSync extends ItsLearningSoapClient
      * @param string $role
      * @return bool
      */
-    public function updatePersonFromCustomer(Customer $customer, string $role = 'Student'): bool
+    public function updatePersonFromCustomer(Customer $customer, string $role = PersonManagement::ROLE_STUDENT): bool
     {
         $payload = $this->customerToPersonPayload($customer, $role);
         parent::updatePerson($payload);
@@ -72,7 +73,7 @@ class PersonManagementServiceSync extends ItsLearningSoapClient
         return true;
     }
 
-    protected function customerToPersonPayload(Customer $customer, $role = 'Student'): array
+    protected function customerToPersonPayload(Customer $customer, $role = PersonManagement::ROLE_STUDENT): array
     {
         $payload = [
             'sourcedId' => [
