@@ -7,7 +7,10 @@ use Illuminate\Support\ServiceProvider;
 use Apility\ItsLearning\Contracts\AuthorizesClients;
 
 use Apility\ItsLearning\Services\Authentication;
-use Apility\ItsLearning\Services\PersonManagement;
+
+use Apility\ItsLearning\Services\PersonManagementServiceSync;
+use Apility\ItsLearning\Services\MembershipManagementServiceSync;
+use Apility\ItsLearning\Services\GroupManagementServiceSync;
 
 class ItsLearningServiceProvider extends ServiceProvider
 {
@@ -19,7 +22,9 @@ class ItsLearningServiceProvider extends ServiceProvider
             $this->app['config']->get('itslearning.sandbox')
         ));
 
-        $this->app->bind(PersonManagement::class, PersonManagement::class);
+        $this->app->bind(PersonManagementServiceSync::class);
+        $this->app->bind(MembershipManagementServiceSync::class);
+        $this->app->bind(GroupManagementServiceSync::class);
     }
 
     public function boot()
