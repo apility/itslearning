@@ -60,9 +60,10 @@ class PersonManagementServiceSync extends ItsLearningSoapClient
      * @param string $role
      * @return bool
      */
-    public function createPersonFromCustomer(Customer $customer, string $role = PersonManagement::ROLE_STUDENT): bool
+    public function createPersonFromCustomer(Customer $customer, string $role = PersonManagement::ROLE_STUDENT, $additional = []): bool
     {
         $payload = $this->customerToPersonPayload($customer, $role);
+        $payload = array_merge($payload, $additional);
         parent::createPerson($payload);
 
         return true;
