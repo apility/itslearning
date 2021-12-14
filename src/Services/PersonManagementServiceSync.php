@@ -30,6 +30,14 @@ class PersonManagementServiceSync extends ItsLearningSoapClient
         if ($person = $response->person ?? null) {
             return json_decode(json_encode($person), true);
         }
+
+        return null;
+    }
+
+    public function customerExists(Customer $customer): bool
+    {
+        $person  = $this->readPersonByCustomerId($customer->id);
+        return (bool) $person;
     }
 
     /**

@@ -9,6 +9,7 @@ use Apility\ItsLearning\Models\Person;
 /**
  * @method static bool createPersonFromCustomer(\Netflex\Customers\Customer $customer, string $role = 'Student')
  * @method static array readPersonByCustomerId(string|int $customer)
+ * @method static bool customerExists(\Netflex\Customers\Customer $customer)
  * @method static bool updatePersonFromCustomer(\Netflex\Customers\Customer $customer, string $role = 'Student')
  * @method static bool deletePersonByCustomerId(string|int $customer)
  */
