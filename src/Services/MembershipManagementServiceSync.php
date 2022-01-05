@@ -4,6 +4,7 @@ namespace Apility\ItsLearning\Services;
 
 use Apility\ItsLearning\Facades\MembershipManagement;
 use Apility\ItsLearning\Soap\ItsLearningSoapClient;
+use App\Models\CourseMembership;
 use Netflex\Customers\Customer;
 
 class MembershipManagementServiceSync extends ItsLearningSoapClient
@@ -17,8 +18,6 @@ class MembershipManagementServiceSync extends ItsLearningSoapClient
      */
     public function createMembership(string $membershipId, Customer $customer, string $groupId, string $role = MembershipManagement::ROLE_LEARNER)
     {
-        $membershipId = $customer->id . '-' . $groupId;
-
         $payload = [
             'sourcedId' => [
                 'identifier' => $membershipId,
@@ -43,14 +42,25 @@ class MembershipManagementServiceSync extends ItsLearningSoapClient
         return $membershipId;
     }
 
-    public function deleteMembership(string $membershipId)
+    public function readMembershipsForPerson(string $person)
     {
         $payload = [
-            'sourcedId' => [
-                'identifier' => $membershipId,
+            'personSourcedId' => [
+                'identifier' => $person,
             ]
         ];
 
-        parent::deleteMembership($payload);
+        return parent::readMembershipsForPerson($payload)->membershipIDPairSet;
+    }
+
+    public function deleteMembership($syncId)
+    {
+        $payload = [
+            'sourcedId' => [
+                'identifier' => $syncId,
+            ]
+        ];
+
+        return parent::deleteMembership($payload);
     }
 }
